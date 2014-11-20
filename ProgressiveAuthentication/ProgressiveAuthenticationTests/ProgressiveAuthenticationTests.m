@@ -1,19 +1,19 @@
 //
-//  progressiveAuthenticationTests.m
-//  progressiveAuthenticationTests
+//  ProgressiveAuthenticationTests.m
+//  ProgressiveAuthenticationTests
 //
-//  Created by Edwin Zhang on 11/11/14.
+//  Created by Edwin Zhang on 11/19/14.
 //  Copyright (c) 2014 MIT. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface progressiveAuthenticationTests : XCTestCase
+@interface ProgressiveAuthenticationTests : XCTestCase
 
 @end
 
-@implementation progressiveAuthenticationTests
+@implementation ProgressiveAuthenticationTests
 
 - (void)setUp {
     [super setUp];
