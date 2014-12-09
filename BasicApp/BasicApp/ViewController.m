@@ -131,7 +131,10 @@
     if ([[ProgressiveAuthentication sharedInstance] authenticationType] == ProgressiveAuthenticationUnlockTypePassword) {
         ProgressiveAuthenticationCreatePasswordViewController *createPasswordVC = [[ProgressiveAuthenticationCreatePasswordViewController alloc] init];
         [self presentViewController:createPasswordVC animated:YES completion:nil];
-    } else if ([[ProgressiveAuthentication sharedInstance] authenticationType] == ProgressiveAuthenticationUnlockTypeNone) {
+    } else if ([[ProgressiveAuthentication sharedInstance] authenticationType] == ProgressiveAuthenticationUnlockTypePattern) {
+        ProgressiveAuthenticationCreatePatternViewController *createPatternVC = [[ProgressiveAuthenticationCreatePatternViewController alloc] init];
+        [self presentViewController:createPatternVC animated:YES completion:nil];
+    }else if ([[ProgressiveAuthentication sharedInstance] authenticationType] == ProgressiveAuthenticationUnlockTypeNone) {
         UIAlertView *noPasswordAlertView = [[UIAlertView alloc] initWithTitle:@"" message:@"No Password to Reset!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [noPasswordAlertView show];
     }
@@ -152,7 +155,8 @@
     } else if ([authenticationMethod isEqual:@"TouchID"]) {
         
     } else if ([authenticationMethod isEqual:@"Pattern"]) {
-        
+        ProgressiveAuthenticationCreatePatternViewController *patternVC = [[ProgressiveAuthenticationCreatePatternViewController alloc] init];
+        [self presentViewController:patternVC animated:YES completion:nil];
     } else if ([authenticationMethod isEqual:@"One-time code"]) {
         
     } else if ([authenticationMethod isEqual: @"None"]) {

@@ -13,6 +13,8 @@
 #import "ProgressiveAuthenticationEnterPasswordViewController.h"
 #import "ProgressiveAuthenticationUnlockViewController.h"
 #import "ProgressiveAuthenticationLockModel.h"
+#import "ProgressiveAuthenticationCreatePatternViewController.h"
+#import "ProgressiveAuthenticationEnterPatternViewController.h"
 
 typedef NS_ENUM(NSUInteger, ProgressiveAuthenticationTouchIDResponse) {
     ProgressiveAuthenticationTouchIDResponseUndefined,

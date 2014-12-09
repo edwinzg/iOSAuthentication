@@ -22,6 +22,12 @@
 		5B61FE081A1AE6AD00322E7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B61FE071A1AE6AD00322E7A /* Images.xcassets */; };
 		5B61FE0B1A1AE6AD00322E7A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B61FE091A1AE6AD00322E7A /* LaunchScreen.xib */; };
 		5B61FE171A1AE6AD00322E7A /* BasicAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B61FE161A1AE6AD00322E7A /* BasicAppTests.m */; };
+		5BC917B11A36C59B00E72099 /* ProgressiveAuthenticationPatternViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC917B01A36C59B00E72099 /* ProgressiveAuthenticationPatternViewController.m */; };
+		5BC917B41A36C94C00E72099 /* ProgressiveAuthenticationPatternView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC917B31A36C94C00E72099 /* ProgressiveAuthenticationPatternView.m */; };
+		5BC917B81A36CE0F00E72099 /* dot_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BC917B61A36CE0F00E72099 /* dot_off.png */; };
+		5BC917B91A36CE0F00E72099 /* dot_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BC917B71A36CE0F00E72099 /* dot_on.png */; };
+		5BC917BC1A36D44400E72099 /* ProgressiveAuthenticationCreatePatternViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC917BB1A36D44400E72099 /* ProgressiveAuthenticationCreatePatternViewController.m */; };
+		5BC917BF1A36D64A00E72099 /* ProgressiveAuthenticationEnterPatternViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC917BE1A36D64A00E72099 /* ProgressiveAuthenticationEnterPatternViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +68,16 @@
 		5B61FE101A1AE6AD00322E7A /* BasicAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B61FE151A1AE6AD00322E7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B61FE161A1AE6AD00322E7A /* BasicAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicAppTests.m; sourceTree = "<group>"; };
+		5BC917AF1A36C59B00E72099 /* ProgressiveAuthenticationPatternViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressiveAuthenticationPatternViewController.h; sourceTree = "<group>"; };
+		5BC917B01A36C59B00E72099 /* ProgressiveAuthenticationPatternViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressiveAuthenticationPatternViewController.m; sourceTree = "<group>"; };
+		5BC917B21A36C94C00E72099 /* ProgressiveAuthenticationPatternView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressiveAuthenticationPatternView.h; sourceTree = "<group>"; };
+		5BC917B31A36C94C00E72099 /* ProgressiveAuthenticationPatternView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressiveAuthenticationPatternView.m; sourceTree = "<group>"; };
+		5BC917B61A36CE0F00E72099 /* dot_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot_off.png; sourceTree = "<group>"; };
+		5BC917B71A36CE0F00E72099 /* dot_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot_on.png; sourceTree = "<group>"; };
+		5BC917BA1A36D44400E72099 /* ProgressiveAuthenticationCreatePatternViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressiveAuthenticationCreatePatternViewController.h; sourceTree = "<group>"; };
+		5BC917BB1A36D44400E72099 /* ProgressiveAuthenticationCreatePatternViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressiveAuthenticationCreatePatternViewController.m; sourceTree = "<group>"; };
+		5BC917BD1A36D64A00E72099 /* ProgressiveAuthenticationEnterPatternViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressiveAuthenticationEnterPatternViewController.h; sourceTree = "<group>"; };
+		5BC917BE1A36D64A00E72099 /* ProgressiveAuthenticationEnterPatternViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressiveAuthenticationEnterPatternViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,16 +104,25 @@
 				5B41DE411A32577E00630682 /* Info.plist */,
 				5B41DE431A32577E00630682 /* ProgressiveAuthentication.h */,
 				5B41DE441A32577E00630682 /* ProgressiveAuthentication.m */,
+				5B41DE491A32577E00630682 /* ProgressiveAuthenticationLockModel.h */,
+				5B41DE4A1A32577E00630682 /* ProgressiveAuthenticationLockModel.m */,
 				5B41DE451A32577E00630682 /* ProgressiveAuthenticationCreatePasswordViewController.h */,
 				5B41DE461A32577E00630682 /* ProgressiveAuthenticationCreatePasswordViewController.m */,
 				5B41DE471A32577E00630682 /* ProgressiveAuthenticationEnterPasswordViewController.h */,
 				5B41DE481A32577E00630682 /* ProgressiveAuthenticationEnterPasswordViewController.m */,
-				5B41DE491A32577E00630682 /* ProgressiveAuthenticationLockModel.h */,
-				5B41DE4A1A32577E00630682 /* ProgressiveAuthenticationLockModel.m */,
 				5B41DE4D1A32577E00630682 /* ProgressiveAuthenticationPasswordViewController.h */,
 				5B41DE4E1A32577E00630682 /* ProgressiveAuthenticationPasswordViewController.m */,
+				5BC917B21A36C94C00E72099 /* ProgressiveAuthenticationPatternView.h */,
+				5BC917B31A36C94C00E72099 /* ProgressiveAuthenticationPatternView.m */,
+				5BC917BA1A36D44400E72099 /* ProgressiveAuthenticationCreatePatternViewController.h */,
+				5BC917BB1A36D44400E72099 /* ProgressiveAuthenticationCreatePatternViewController.m */,
+				5BC917BD1A36D64A00E72099 /* ProgressiveAuthenticationEnterPatternViewController.h */,
+				5BC917BE1A36D64A00E72099 /* ProgressiveAuthenticationEnterPatternViewController.m */,
+				5BC917AF1A36C59B00E72099 /* ProgressiveAuthenticationPatternViewController.h */,
+				5BC917B01A36C59B00E72099 /* ProgressiveAuthenticationPatternViewController.m */,
 				5B41DE4F1A32577E00630682 /* ProgressiveAuthenticationUnlockViewController.h */,
 				5B41DE501A32577E00630682 /* ProgressiveAuthenticationUnlockViewController.m */,
+				5BC917B51A36CDFE00E72099 /* Supporting Files */,
 			);
 			name = ProgressiveAuthentication;
 			path = ../../ProgressiveAuthentication/ProgressiveAuthentication;
@@ -160,6 +185,15 @@
 			isa = PBXGroup;
 			children = (
 				5B61FE151A1AE6AD00322E7A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5BC917B51A36CDFE00E72099 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5BC917B61A36CE0F00E72099 /* dot_off.png */,
+				5BC917B71A36CE0F00E72099 /* dot_on.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -246,6 +280,8 @@
 			files = (
 				5B41DE511A32577E00630682 /* Info.plist in Resources */,
 				5B61FE061A1AE6AD00322E7A /* Main.storyboard in Resources */,
+				5BC917B91A36CE0F00E72099 /* dot_on.png in Resources */,
+				5BC917B81A36CE0F00E72099 /* dot_off.png in Resources */,
 				5B61FE0B1A1AE6AD00322E7A /* LaunchScreen.xib in Resources */,
 				5B61FE081A1AE6AD00322E7A /* Images.xcassets in Resources */,
 			);
@@ -267,7 +303,10 @@
 			files = (
 				5B61FE001A1AE6AD00322E7A /* BasicApp.xcdatamodeld in Sources */,
 				5B61FDFD1A1AE6AD00322E7A /* AppDelegate.m in Sources */,
+				5BC917BF1A36D64A00E72099 /* ProgressiveAuthenticationEnterPatternViewController.m in Sources */,
+				5BC917BC1A36D44400E72099 /* ProgressiveAuthenticationCreatePatternViewController.m in Sources */,
 				5B41DE591A32577E00630682 /* ProgressiveAuthenticationUnlockViewController.m in Sources */,
+				5BC917B41A36C94C00E72099 /* ProgressiveAuthenticationPatternView.m in Sources */,
 				5B41DE561A32577E00630682 /* ProgressiveAuthenticationLockModel.m in Sources */,
 				5B61FE031A1AE6AD00322E7A /* ViewController.m in Sources */,
 				5B41DE551A32577E00630682 /* ProgressiveAuthenticationEnterPasswordViewController.m in Sources */,
@@ -275,6 +314,7 @@
 				5B41DE541A32577E00630682 /* ProgressiveAuthenticationCreatePasswordViewController.m in Sources */,
 				5B41DE531A32577E00630682 /* ProgressiveAuthentication.m in Sources */,
 				5B61FDFA1A1AE6AD00322E7A /* main.m in Sources */,
+				5BC917B11A36C59B00E72099 /* ProgressiveAuthenticationPatternViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

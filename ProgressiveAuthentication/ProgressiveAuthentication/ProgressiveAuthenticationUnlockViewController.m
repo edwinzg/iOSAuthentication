@@ -9,6 +9,7 @@
 #import "ProgressiveAuthenticationUnlockViewController.h"
 #import "ProgressiveAuthentication.h"
 #import "ProgressiveAuthenticationEnterPasswordViewController.h"
+#import "ProgressiveAuthenticationEnterPatternViewController.h"
 
 @implementation ProgressiveAuthenticationUnlockViewController
 
@@ -36,10 +37,15 @@
 #pragma mark - Present unlock methods
 
 - (void)showUnlockAnimated:(BOOL)animated {
-    if ([ProgressiveAuthentication shouldUseTouchID]) {
+    if ([[ProgressiveAuthentication sharedInstance] authenticationType] ==
+        ProgressiveAuthenticationUnlockTypeTouchID) {
         [self showTouchID];
-    } else {
+    } else if ([[ProgressiveAuthentication sharedInstance] authenticationType] ==
+                ProgressiveAuthenticationUnlockTypePassword) {
         [self showPasswordAnimated:animated];
+    } else if ([[ProgressiveAuthentication sharedInstance] authenticationType] ==
+               ProgressiveAuthenticationUnlockTypePattern) {
+        [self showPatternAnimated:animated];
     }
 }
 
@@ -65,6 +71,12 @@
                      completion:nil];
 }
 
+- (void)showPatternAnimated:(BOOL)animated {
+    [self presentViewController:[self enterPatternVC]
+                       animated:animated
+                     completion:nil];
+}
+
 - (ProgressiveAuthenticationEnterPasswordViewController *)enterPasswordVC {
     ProgressiveAuthenticationEnterPasswordViewController *enterPasswordVC = [[ProgressiveAuthenticationEnterPasswordViewController alloc] init];
     __weak ProgressiveAuthenticationUnlockViewController *weakSelf = self;
@@ -78,6 +90,21 @@
     };
     return enterPasswordVC;
 }
+
+- (ProgressiveAuthenticationEnterPatternViewController *)enterPatternVC {
+    ProgressiveAuthenticationEnterPatternViewController *enterPatternVC = [[ProgressiveAuthenticationEnterPatternViewController alloc] init];
+    __weak ProgressiveAuthenticationUnlockViewController *weakSelf = self;
+    enterPatternVC.willFinishWithResult = ^(BOOL success) {
+        if (success) {
+            [weakSelf unlockWithType:ProgressiveAuthenticationUnlockTypePattern];
+        }
+        else {
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        }
+    };
+    return enterPatternVC;
+}
+
 
 - (void)appWillEnterForeground {
     if (!self.presentedViewController) {

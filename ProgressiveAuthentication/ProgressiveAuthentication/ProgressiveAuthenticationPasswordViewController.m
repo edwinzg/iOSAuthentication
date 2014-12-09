@@ -21,6 +21,8 @@
     return self;
 }
 
+#pragma mark - Self Inflating Views
+
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 25, 300, 30)];
@@ -39,6 +41,8 @@
     return _passwordField;
 }
 
+#pragma mark - Layout
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -49,21 +53,11 @@
     [self.view addSubview:[self titleLabel]];
     [self.view addSubview:[self passwordField]];
     [self.passwordField becomeFirstResponder];
-    
-    [self configureNavigationItems];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)configureNavigationItems {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(userTappedCancel)];
-}
-
-- (void)userTappedCancel {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)finishWithResult:(BOOL)success animated:(BOOL)animated {

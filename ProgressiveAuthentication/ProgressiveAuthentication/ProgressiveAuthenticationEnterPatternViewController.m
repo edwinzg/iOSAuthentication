@@ -1,24 +1,22 @@
 //
-//  ProgressiveAuthenticationEnterPasswordViewController.m
-//  ProgressiveAuthentication
+//  ProgressiveAuthenticationEnterPatternViewController.m
+//  BasicApp
 //
-//  Created by Edwin Zhang on 12/5/14.
+//  Created by Edwin Zhang on 12/9/14.
 //  Copyright (c) 2014 MIT. All rights reserved.
 //
 
-#import "ProgressiveAuthenticationEnterPasswordViewController.h"
+#import "ProgressiveAuthenticationEnterPatternViewController.h"
 #import "ProgressiveAuthentication.h"
 #import "ProgressiveAuthenticationUnlockViewController.h"
 
 #define ProgressiveAuthenticationNumIncorrectAttemptsUserDefaultsKey @"ProgressiveAuthenticationNumIncorrectAttemptsUserDefaultsKey"
 
-@interface ProgressiveAuthenticationEnterPasswordViewController ()
-
-@property (nonatomic) UIButton *submitButton;
+@interface ProgressiveAuthenticationEnterPatternViewController ()
 
 @end
 
-@implementation ProgressiveAuthenticationEnterPasswordViewController
+@implementation ProgressiveAuthenticationEnterPatternViewController
 
 #pragma mark - Class Methods
 
@@ -28,26 +26,7 @@
     [standardDefaults synchronize];
 }
 
-#pragma mark - Self Inflating Views
-
-- (UIButton *)submitButton {
-    if (!_submitButton) {
-        _submitButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        _submitButton.frame = CGRectMake(45, 125, 100, 50);
-        [_submitButton setTitle:@"Submit" forState:UIControlStateNormal];
-        [_submitButton addTarget:self action:@selector(submitButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _submitButton;
-}
-
-#pragma mark - Button Actions
-
-- (void)submitButtonTapped:(UIButton *)sender
-{
-    [self performSelector:@selector(enteredPassword:) withObject:self.passwordField.text afterDelay:0.3];
-}
-
-#pragma mark - Instance Methods
+#pragma mark - Initialization
 
 - (instancetype)init {
     self = [super init];
@@ -61,7 +40,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.titleLabel.text = [self.touchLock model].enterPasswordInitialLabelText;
-    [self.view addSubview:[self submitButton]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,18 +47,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)enteredPassword:(NSString *)password {
-    if ([self.touchLock isPasswordValid:password]) {
+- (void)enteredPattern:(NSString *)pattern {
+    if ([self.touchLock isPasswordValid:pattern]) {
         [[self class] resetPasswordAttemptHistory];
         [self finishWithResult:YES animated:YES];
     }
     else {
         [self shakeAndVibrateCompletion:^{
             self.titleLabel.text = [self.touchLock model].enterPasswordIncorrectLabelText;
-            [self clearPassword];
+            [self clearPattern];
             [self recordIncorrectPasswordAttempt];
         }];
-        
     }
 }
 
