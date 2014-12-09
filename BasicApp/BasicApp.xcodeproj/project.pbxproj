@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B41DE511A32577E00630682 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B41DE411A32577E00630682 /* Info.plist */; };
+		5B41DE531A32577E00630682 /* ProgressiveAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B41DE441A32577E00630682 /* ProgressiveAuthentication.m */; };
+		5B41DE541A32577E00630682 /* ProgressiveAuthenticationCreatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B41DE461A32577E00630682 /* ProgressiveAuthenticationCreatePasswordViewController.m */; };
+		5B41DE551A32577E00630682 /* ProgressiveAuthenticationEnterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B41DE481A32577E00630682 /* ProgressiveAuthenticationEnterPasswordViewController.m */; };
+		5B41DE561A32577E00630682 /* ProgressiveAuthenticationLockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B41DE4A1A32577E00630682 /* ProgressiveAuthenticationLockModel.m */; };
+		5B41DE581A32577E00630682 /* ProgressiveAuthenticationPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B41DE4E1A32577E00630682 /* ProgressiveAuthenticationPasswordViewController.m */; };
+		5B41DE591A32577E00630682 /* ProgressiveAuthenticationUnlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B41DE501A32577E00630682 /* ProgressiveAuthenticationUnlockViewController.m */; };
 		5B61FDFA1A1AE6AD00322E7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B61FDF91A1AE6AD00322E7A /* main.m */; };
 		5B61FDFD1A1AE6AD00322E7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B61FDFC1A1AE6AD00322E7A /* AppDelegate.m */; };
 		5B61FE001A1AE6AD00322E7A /* BasicApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B61FDFE1A1AE6AD00322E7A /* BasicApp.xcdatamodeld */; };
@@ -28,6 +35,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B41DE411A32577E00630682 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B41DE431A32577E00630682 /* ProgressiveAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressiveAuthentication.h; sourceTree = "<group>"; };
+		5B41DE441A32577E00630682 /* ProgressiveAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressiveAuthentication.m; sourceTree = "<group>"; };
+		5B41DE451A32577E00630682 /* ProgressiveAuthenticationCreatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressiveAuthenticationCreatePasswordViewController.h; sourceTree = "<group>"; };
+		5B41DE461A32577E00630682 /* ProgressiveAuthenticationCreatePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressiveAuthenticationCreatePasswordViewController.m; sourceTree = "<group>"; };
+		5B41DE471A32577E00630682 /* ProgressiveAuthenticationEnterPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressiveAuthenticationEnterPasswordViewController.h; sourceTree = "<group>"; };
+		5B41DE481A32577E00630682 /* ProgressiveAuthenticationEnterPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressiveAuthenticationEnterPasswordViewController.m; sourceTree = "<group>"; };
+		5B41DE491A32577E00630682 /* ProgressiveAuthenticationLockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressiveAuthenticationLockModel.h; sourceTree = "<group>"; };
+		5B41DE4A1A32577E00630682 /* ProgressiveAuthenticationLockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressiveAuthenticationLockModel.m; sourceTree = "<group>"; };
+		5B41DE4D1A32577E00630682 /* ProgressiveAuthenticationPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressiveAuthenticationPasswordViewController.h; sourceTree = "<group>"; };
+		5B41DE4E1A32577E00630682 /* ProgressiveAuthenticationPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressiveAuthenticationPasswordViewController.m; sourceTree = "<group>"; };
+		5B41DE4F1A32577E00630682 /* ProgressiveAuthenticationUnlockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressiveAuthenticationUnlockViewController.h; sourceTree = "<group>"; };
+		5B41DE501A32577E00630682 /* ProgressiveAuthenticationUnlockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressiveAuthenticationUnlockViewController.m; sourceTree = "<group>"; };
 		5B61FDF41A1AE6AD00322E7A /* BasicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B61FDF81A1AE6AD00322E7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B61FDF91A1AE6AD00322E7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,6 +82,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B41DE401A32577E00630682 /* ProgressiveAuthentication */ = {
+			isa = PBXGroup;
+			children = (
+				5B41DE411A32577E00630682 /* Info.plist */,
+				5B41DE431A32577E00630682 /* ProgressiveAuthentication.h */,
+				5B41DE441A32577E00630682 /* ProgressiveAuthentication.m */,
+				5B41DE451A32577E00630682 /* ProgressiveAuthenticationCreatePasswordViewController.h */,
+				5B41DE461A32577E00630682 /* ProgressiveAuthenticationCreatePasswordViewController.m */,
+				5B41DE471A32577E00630682 /* ProgressiveAuthenticationEnterPasswordViewController.h */,
+				5B41DE481A32577E00630682 /* ProgressiveAuthenticationEnterPasswordViewController.m */,
+				5B41DE491A32577E00630682 /* ProgressiveAuthenticationLockModel.h */,
+				5B41DE4A1A32577E00630682 /* ProgressiveAuthenticationLockModel.m */,
+				5B41DE4D1A32577E00630682 /* ProgressiveAuthenticationPasswordViewController.h */,
+				5B41DE4E1A32577E00630682 /* ProgressiveAuthenticationPasswordViewController.m */,
+				5B41DE4F1A32577E00630682 /* ProgressiveAuthenticationUnlockViewController.h */,
+				5B41DE501A32577E00630682 /* ProgressiveAuthenticationUnlockViewController.m */,
+			);
+			name = ProgressiveAuthentication;
+			path = ../../ProgressiveAuthentication/ProgressiveAuthentication;
+			sourceTree = "<group>";
+		};
 		5B61FDEB1A1AE6AD00322E7A = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +124,7 @@
 		5B61FDF61A1AE6AD00322E7A /* BasicApp */ = {
 			isa = PBXGroup;
 			children = (
+				5B41DE401A32577E00630682 /* ProgressiveAuthentication */,
 				5B61FDFB1A1AE6AD00322E7A /* AppDelegate.h */,
 				5B61FDFC1A1AE6AD00322E7A /* AppDelegate.m */,
 				5B61FE011A1AE6AD00322E7A /* ViewController.h */,
@@ -202,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B41DE511A32577E00630682 /* Info.plist in Resources */,
 				5B61FE061A1AE6AD00322E7A /* Main.storyboard in Resources */,
 				5B61FE0B1A1AE6AD00322E7A /* LaunchScreen.xib in Resources */,
 				5B61FE081A1AE6AD00322E7A /* Images.xcassets in Resources */,
@@ -224,7 +267,13 @@
 			files = (
 				5B61FE001A1AE6AD00322E7A /* BasicApp.xcdatamodeld in Sources */,
 				5B61FDFD1A1AE6AD00322E7A /* AppDelegate.m in Sources */,
+				5B41DE591A32577E00630682 /* ProgressiveAuthenticationUnlockViewController.m in Sources */,
+				5B41DE561A32577E00630682 /* ProgressiveAuthenticationLockModel.m in Sources */,
 				5B61FE031A1AE6AD00322E7A /* ViewController.m in Sources */,
+				5B41DE551A32577E00630682 /* ProgressiveAuthenticationEnterPasswordViewController.m in Sources */,
+				5B41DE581A32577E00630682 /* ProgressiveAuthenticationPasswordViewController.m in Sources */,
+				5B41DE541A32577E00630682 /* ProgressiveAuthenticationCreatePasswordViewController.m in Sources */,
+				5B41DE531A32577E00630682 /* ProgressiveAuthentication.m in Sources */,
 				5B61FDFA1A1AE6AD00322E7A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,6 +419,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -389,6 +439,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				INFOPLIST_FILE = BasicAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -416,6 +467,7 @@
 				5B61FE1C1A1AE6AD00322E7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5B61FE1D1A1AE6AD00322E7A /* Build configuration list for PBXNativeTarget "BasicAppTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +476,7 @@
 				5B61FE1F1A1AE6AD00322E7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

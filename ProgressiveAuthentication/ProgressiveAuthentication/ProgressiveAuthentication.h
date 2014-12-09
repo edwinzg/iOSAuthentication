@@ -8,12 +8,39 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for ProgressiveAuthentication.
-FOUNDATION_EXPORT double ProgressiveAuthenticationVersionNumber;
+#import "ProgressiveAuthenticationLockModel.h"
+#import "ProgressiveAuthenticationCreatePasswordViewController.h"
+#import "ProgressiveAuthenticationEnterPasswordViewController.h"
+#import "ProgressiveAuthenticationUnlockViewController.h"
+#import "ProgressiveAuthenticationLockModel.h"
 
-//! Project version string for ProgressiveAuthentication.
-FOUNDATION_EXPORT const unsigned char ProgressiveAuthenticationVersionString[];
+typedef NS_ENUM(NSUInteger, ProgressiveAuthenticationTouchIDResponse) {
+    ProgressiveAuthenticationTouchIDResponseUndefined,
+    ProgressiveAuthenticationTouchIDResponseSuccess,
+    ProgressiveAuthenticationTouchIDResponseUsePassword,
+    ProgressiveAuthenticationTouchIDResponseCanceled,
+};
 
-// In this header, you should import all the public headers of your framework using statements like #import <ProgressiveAuthentication/PublicHeader.h>
+@interface ProgressiveAuthentication : NSObject
+
++ (instancetype)sharedInstance;
+
+- (BOOL)isPasswordSet;
+- (NSString *)currentPassword;
+- (ProgressiveAuthenticationUnlockType)authenticationType;
+- (BOOL)isPasswordValid:(NSString *)password;
+- (void)setPassword:(NSString *)password forAuthenticationType:(ProgressiveAuthenticationUnlockType)authenticationType;
+- (void)deletePassword;
+
++ (BOOL)canUseTouchID;
++ (BOOL)shouldUseTouchID;
++ (void)setShouldUseTouchID:(BOOL)shouldUseTouchID;
+- (void)requestTouchIDWithCompletion:(void(^)(ProgressiveAuthenticationTouchIDResponse response))completionBlock;
+- (void)requestTouchIDWithCompletion:(void(^)(ProgressiveAuthenticationTouchIDResponse response))completionBlock reason:(NSString *)reason;
+
+- (NSUInteger)passwordAttemptLimit;
+- (ProgressiveAuthenticationLockModel *)model;
+
+@end
 
 
