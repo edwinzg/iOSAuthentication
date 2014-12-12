@@ -11,6 +11,12 @@
 
 @interface ProgressiveAuthenticationCreateOneTimePasswordViewController ()
 
+@property (strong, nonatomic) AVCaptureDevice* device;
+@property (strong, nonatomic) AVCaptureDeviceInput* input;
+@property (strong, nonatomic) AVCaptureMetadataOutput* output;
+@property (strong, nonatomic) AVCaptureSession* session;
+@property (strong, nonatomic) AVCaptureVideoPreviewLayer* preview;
+
 @end
 
 @implementation ProgressiveAuthenticationCreateOneTimePasswordViewController
@@ -25,6 +31,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if ([self isCameraAvailable]) {
+        [self setupScanner];
+    }
     //[self getSecretKey];
 }
 
@@ -36,6 +45,12 @@
 - (void)enteredCode:(NSString *)code {
     [self.touchLock setPassword:code forAuthenticationType:ProgressiveAuthenticationUnlockTypeOneTime];
     [self finishWithResult:YES animated:YES];
+}
+
+- (BOOL) isCameraAvailable;
+{
+    NSArray *videoDevices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    return [videoDevices count] > 0;
 }
 
 - (void)getSecretKey {
@@ -63,6 +78,54 @@
     [request setHTTPBody:jsonData];
     (void)[NSURLConnection connectionWithRequest:request delegate:self];
     */
+}
+
+#pragma mark AVFoundationSetup
+
+- (void) setupScanner {
+    self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    self.input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
+    
+    self.session = [[AVCaptureSession alloc] init];
+    
+    self.output = [[AVCaptureMetadataOutput alloc] init];
+    [self.session addOutput:self.output];
+    [self.session addInput:self.input];
+    
+    [self.output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    self.output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    
+    self.preview = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
+    self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.preview.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    
+    AVCaptureConnection *con = self.preview.connection;
+    
+    con.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+    
+    [self.view.layer insertSublayer:self.preview atIndex:0];
+}
+
+- (void)startScanning {
+    [self.session startRunning];
+    
+}
+
+- (void) stopScanning {
+    [self.session stopRunning];
+}
+
+#pragma mark AVCaptureMetadataOutputObjectsDelegate
+
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects
+       fromConnection:(AVCaptureConnection *)connection {
+    for(AVMetadataObject *current in metadataObjects) {
+        if([current isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
+            NSString *scannedValue = [((AVMetadataMachineReadableCodeObject *) current) stringValue];
+            [self enteredCode:scannedValue];
+        }
+    }
 }
 
 #pragma mark - NSURLConnectionDataDelegate Methods

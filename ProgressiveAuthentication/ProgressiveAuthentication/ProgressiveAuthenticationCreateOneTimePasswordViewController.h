@@ -6,8 +6,14 @@
 //  Copyright (c) 2014 MIT. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+
 #import "ProgressiveAuthenticationOneTimeViewController.h"
 
-@interface ProgressiveAuthenticationCreateOneTimePasswordViewController : ProgressiveAuthenticationOneTimeViewController <NSURLConnectionDataDelegate>
+@protocol AMScanViewControllerDelegate;
+
+@interface ProgressiveAuthenticationCreateOneTimePasswordViewController : ProgressiveAuthenticationOneTimeViewController <NSURLConnectionDataDelegate,AVCaptureMetadataOutputObjectsDelegate>
+
+@property (nonatomic, weak) id<AMScanViewControllerDelegate> delegate;
 
 @end

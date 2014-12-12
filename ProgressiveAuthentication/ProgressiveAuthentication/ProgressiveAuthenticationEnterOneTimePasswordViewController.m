@@ -48,7 +48,6 @@
     [self performSelector:@selector(enteredCode:) withObject:self.passwordField.text afterDelay:0.3];
 }
 
-
 #pragma mark - Layout
 
 - (void)viewDidLoad {
