@@ -25,7 +25,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self getSecretKey];
+    //[self getSecretKey];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,7 +8,7 @@
 
 #import "ProgressiveAuthenticationOneTimeViewController.h"
 
-@interface ProgressiveAuthenticationEnterOneTimePasswordViewController : ProgressiveAuthenticationOneTimeViewController <UITextFieldDelegate>
+@interface ProgressiveAuthenticationEnterOneTimePasswordViewController : ProgressiveAuthenticationOneTimeViewController
 
 + (void)resetPasswordAttemptHistory;
 

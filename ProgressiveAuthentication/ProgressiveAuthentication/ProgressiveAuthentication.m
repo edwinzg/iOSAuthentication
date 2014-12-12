@@ -83,16 +83,25 @@
 - (NSString *)calculateOneTimeCode {
     NSTimeInterval secondsSinceUnixEpoch = [[NSDate date] timeIntervalSince1970];
     NSString *unix = [NSString stringWithFormat:@"%f", secondsSinceUnixEpoch];
+    NSInteger unixInt = [unix integerValue]/60;
+    NSString *unixString = [NSString stringWithFormat:@"%li", (long)unixInt];
     
-    NSString *key = [self currentPassword]; // this is a __NSCFString
+    NSString *key = [self currentPassword];
     const char *cKey  = [key cStringUsingEncoding:NSASCIIStringEncoding];
-    const char *cData = [unix cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *cData = [unixString cStringUsingEncoding:NSASCIIStringEncoding];
     unsigned char cHMAC[CC_SHA512_DIGEST_LENGTH];
     
     CCHmac(kCCHmacAlgSHA512, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
     NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
     
-    return [self convertToHexadecimalString:HMAC];
+    NSString *code = [self convertToHexadecimalString:HMAC];
+    NSString *lastChar = [code substringFromIndex:[code length]-1];
+    
+    unsigned int offset;
+    NSScanner* scanner = [NSScanner scannerWithString:lastChar];
+    [scanner scanHexInt:&offset];
+    
+    return [[code substringWithRange:NSMakeRange(offset, 6)] uppercaseString];
 }
 
 - (NSString *)convertToHexadecimalString: (NSData *)data {
