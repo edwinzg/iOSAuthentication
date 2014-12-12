@@ -187,7 +187,7 @@
     NSData *data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
     id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     
-    if ([json objectForKey:@"error"]) {
+    if (!json || [json objectForKey:@"error"]) {
         UIAlertView *incorrectAuthenticationView = [[UIAlertView alloc] initWithTitle:@"" message:@"Incorrect Authentication" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [incorrectAuthenticationView show];
         self.username.text = @"";
