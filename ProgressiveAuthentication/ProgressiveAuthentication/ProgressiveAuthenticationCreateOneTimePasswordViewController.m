@@ -9,7 +9,9 @@
 #import "ProgressiveAuthenticationCreateOneTimePasswordViewController.h"
 #import "ProgressiveAuthentication.h"
 
-@interface ProgressiveAuthenticationCreateOneTimePasswordViewController ()
+@interface ProgressiveAuthenticationCreateOneTimePasswordViewController () {
+    NSData *responseData;
+}
 
 @property (strong, nonatomic) AVCaptureDevice* device;
 @property (strong, nonatomic) AVCaptureDeviceInput* input;
@@ -17,16 +19,76 @@
 @property (strong, nonatomic) AVCaptureSession* session;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer* preview;
 
+@property (nonatomic) UITextField *username;
+@property (nonatomic) UITextField *password;
+@property (nonatomic) UITextField *appName;
+@property (nonatomic) UIButton *submitButton;
+
 @end
 
 @implementation ProgressiveAuthenticationCreateOneTimePasswordViewController
+
+#pragma mark - Self Inflating Views
+
+- (UITextField *)username {
+    if (!_username) {
+        _username = [[UITextField alloc] initWithFrame:CGRectMake(20, 75, 250, 30)];
+        [_username setPlaceholder:@"Username"];
+        [_username setBorderStyle:UITextBorderStyleLine];
+        _username.delegate = self;
+    }
+    return _username;
+}
+
+- (UITextField *)password {
+    if (!_password) {
+        _password = [[UITextField alloc] initWithFrame:CGRectMake(20, 125, 250, 30)];
+        [_password setPlaceholder:@"Password"];
+        [_password setSecureTextEntry:YES];
+        [_password setBorderStyle:UITextBorderStyleLine];
+        _password.delegate = self;
+    }
+    return _password;
+}
+
+- (UITextField *)appName {
+    if (!_appName) {
+        _appName = [[UITextField alloc] initWithFrame:CGRectMake(20, 175, 250, 30)];
+        [_appName setPlaceholder:@"App name"];
+        [_appName setBorderStyle:UITextBorderStyleLine];
+        _appName.delegate = self;
+    }
+    return _appName;
+}
+
+- (UIButton *)submitButton {
+    if (!_submitButton) {
+        _submitButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _submitButton.frame = CGRectMake(45, 225, 100, 50);
+        [_submitButton setTitle:@"Submit" forState:UIControlStateNormal];
+        [_submitButton addTarget:self action:@selector(submitButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _submitButton;
+}
+
+#pragma mark - Button Actions
+
+- (void)submitButtonTapped:(UIButton *)sender
+{
+    [self performSelector:@selector(getSecretKey) withObject:nil afterDelay:0.3];
+}
 
 # pragma mark - Layout
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    // Force users to login first
+    [self.passwordField removeFromSuperview];
+    [self.view addSubview:[self username]];
+    [[self username] becomeFirstResponder];
+    [self.view addSubview:[self password]];
+    [self.view addSubview:[self appName]];
+    [self.view addSubview:[self submitButton]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -34,7 +96,6 @@
     if ([self isCameraAvailable]) {
         [self setupScanner];
     }
-    //[self getSecretKey];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,30 +115,17 @@
 }
 
 - (void)getSecretKey {
-    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: 128];
-    for (int i=0; i<128; i++) {
-        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
-    }
-    
-    //NSData *randomData = [[NSFileHandle fileHandleForReadingAtPath:@"/dev/random"] readDataOfLength:128];
-    //NSString *randomString = [[NSString alloc] initWithData:randomData encoding:[NSString defaultCStringEncoding]];
-    
-
-    [self enteredCode:randomString];
-    
-    /*
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"username", @"username", nil];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:self.username.text forKey:@"username"];
+    [dict setObject:self.password.text forKey:@"password"];
+    [dict setObject:self.appName.text forKey:@"app"];
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
     NSString *jsonString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
-    NSMutableURLRequest *  request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://127.0.0.1:8000/keys/getKey"]];
-    //[request setValue:jsonString forHTTPHeaderField:@"json"];
-    //[request setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPMethod:@"GET"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://127.0.0.1:8000/keys/getKey"]];
+    [request setHTTPMethod:@"POST"];
     [request setHTTPBody:jsonData];
     (void)[NSURLConnection connectionWithRequest:request delegate:self];
-    */
 }
 
 #pragma mark AVFoundationSetup
@@ -131,7 +179,34 @@
 #pragma mark - NSURLConnectionDataDelegate Methods
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data  {
-    NSLog(@"Data is %@", data);
+    responseData = data;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSString *responseString = [[NSString alloc]initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSData *data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    if ([json objectForKey:@"error"]) {
+        UIAlertView *incorrectAuthenticationView = [[UIAlertView alloc] initWithTitle:@"" message:@"Incorrect Authentication" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [incorrectAuthenticationView show];
+        self.username.text = @"";
+        self.password.text = @"";
+        self.appName.text = @"";
+    } else {
+        [self enteredCode:[json objectForKey: @"key"]];
+    }
+}
+
+#pragma mark - UITextField Methods
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self performSelector:@selector(getSecretKey) withObject:nil afterDelay:0.3];
+    return YES;
 }
 
 @end

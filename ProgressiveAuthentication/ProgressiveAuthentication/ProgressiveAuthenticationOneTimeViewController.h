@@ -10,7 +10,7 @@
 
 @class ProgressiveAuthentication;
 
-@interface ProgressiveAuthenticationOneTimeViewController : UIViewController <UITextFieldDelegate>
+@interface ProgressiveAuthenticationOneTimeViewController : UIViewController
 
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UITextField *passwordField;

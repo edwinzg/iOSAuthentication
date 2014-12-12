@@ -13,8 +13,6 @@
 
 @interface ProgressiveAuthenticationEnterOneTimePasswordViewController ()
 
-@property (nonatomic) UILabel *titleLabel;
-@property (nonatomic) UITextField *passwordField;
 @property (nonatomic) UIButton *submitButton;
 
 @end
@@ -101,6 +99,18 @@
         unlockViewController = (ProgressiveAuthenticationUnlockViewController *)presentingViewController;
     }
     return unlockViewController;
+}
+
+#pragma mark - UITextField Methods
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSString *newString = textField.text;
+    [self performSelector:@selector(enteredCode:) withObject:newString afterDelay:0.3];
+    return YES;
 }
 
 @end

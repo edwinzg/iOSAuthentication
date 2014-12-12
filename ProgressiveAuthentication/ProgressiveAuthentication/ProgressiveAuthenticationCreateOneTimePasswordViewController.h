@@ -12,7 +12,7 @@
 
 @protocol AMScanViewControllerDelegate;
 
-@interface ProgressiveAuthenticationCreateOneTimePasswordViewController : ProgressiveAuthenticationOneTimeViewController <NSURLConnectionDataDelegate,AVCaptureMetadataOutputObjectsDelegate>
+@interface ProgressiveAuthenticationCreateOneTimePasswordViewController : ProgressiveAuthenticationOneTimeViewController <NSURLConnectionDataDelegate,AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate>
 
 @property (nonatomic, weak) id<AMScanViewControllerDelegate> delegate;
 
