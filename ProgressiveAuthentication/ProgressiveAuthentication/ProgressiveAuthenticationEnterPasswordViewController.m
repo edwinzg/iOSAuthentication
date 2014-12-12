@@ -47,7 +47,7 @@
     [self performSelector:@selector(enteredPassword:) withObject:self.passwordField.text afterDelay:0.3];
 }
 
-#pragma mark - Instance Methods
+#pragma mark - Initialization
 
 - (instancetype)init {
     self = [super init];
@@ -56,6 +56,8 @@
     }
     return self;
 }
+
+#pragma mark - Views
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -96,9 +98,7 @@
 }
 
 - (void)callExceededLimitActionBlock {
-    [[self parentUnlockViewController] dismissWithUnlockSuccess:NO
-                                                     unlockType:ProgressiveAuthenticationUnlockTypeNone
-                                                       animated:NO];
+    exit(0);
 }
 
 - (ProgressiveAuthenticationUnlockViewController *)parentUnlockViewController {

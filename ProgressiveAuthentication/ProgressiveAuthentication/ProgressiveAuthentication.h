@@ -15,6 +15,8 @@
 #import "ProgressiveAuthenticationLockModel.h"
 #import "ProgressiveAuthenticationCreatePatternViewController.h"
 #import "ProgressiveAuthenticationEnterPatternViewController.h"
+#import "ProgressiveAuthenticationCreateOneTimePasswordViewController.h"
+#import "ProgressiveAuthenticationEnterOneTimePasswordViewController.h"
 
 typedef NS_ENUM(NSUInteger, ProgressiveAuthenticationTouchIDResponse) {
     ProgressiveAuthenticationTouchIDResponseUndefined,
@@ -30,6 +32,7 @@ typedef NS_ENUM(NSUInteger, ProgressiveAuthenticationTouchIDResponse) {
 - (BOOL)isPasswordSet;
 - (NSString *)currentPassword;
 - (ProgressiveAuthenticationUnlockType)authenticationType;
+- (void)setAuthenticationType:(ProgressiveAuthenticationUnlockType)authenticationType;
 - (BOOL)isPasswordValid:(NSString *)password;
 - (void)setPassword:(NSString *)password forAuthenticationType:(ProgressiveAuthenticationUnlockType)authenticationType;
 - (void)deletePassword;

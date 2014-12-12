@@ -105,7 +105,7 @@
     UILabel *setPasscodeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, self.view.bounds.size.width, 50)];
     [setPasscodeLabel setText:@"Select your authentication method"];
     [self.view addSubview:setPasscodeLabel];
-    _pickerData = @[@"", @"None", @"PIN", @"Password", @"TouchID", @"Pattern", @"One-time code"];
+    _pickerData = @[@"", @"None", @"Password", @"TouchID", @"Pattern", @"One-time code"];
     [self.view addSubview:[self authentcationSelector]];
 }
 
@@ -134,6 +134,9 @@
     } else if ([[ProgressiveAuthentication sharedInstance] authenticationType] == ProgressiveAuthenticationUnlockTypePattern) {
         ProgressiveAuthenticationCreatePatternViewController *createPatternVC = [[ProgressiveAuthenticationCreatePatternViewController alloc] init];
         [self presentViewController:createPatternVC animated:YES completion:nil];
+    } else if ([[ProgressiveAuthentication sharedInstance] authenticationType] == ProgressiveAuthenticationUnlockTypeOneTime) {
+        UIAlertView *cannotResetAlertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Cannot reset password!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [cannotResetAlertView show];
     }else if ([[ProgressiveAuthentication sharedInstance] authenticationType] == ProgressiveAuthenticationUnlockTypeNone) {
         UIAlertView *noPasswordAlertView = [[UIAlertView alloc] initWithTitle:@"" message:@"No Password to Reset!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [noPasswordAlertView show];
@@ -147,18 +150,24 @@
 # pragma mark - Authentcation stuff
 
 - (void)setPasscodeForAuthenticationMethod:(NSString *)authenticationMethod {
-    if ([authenticationMethod isEqual: @"PIN"]) {
-
-    } else if ([authenticationMethod isEqual:@"Password"]) {
+    if ([authenticationMethod isEqual:@"Password"]) {
         ProgressiveAuthenticationCreatePasswordViewController *createPasswordVC = [[ProgressiveAuthenticationCreatePasswordViewController alloc] init];
         [self presentViewController:createPasswordVC animated:YES completion:nil];
     } else if ([authenticationMethod isEqual:@"TouchID"]) {
-        
+        if ([ProgressiveAuthentication canUseTouchID]) {
+            [ProgressiveAuthentication setShouldUseTouchID:YES];
+            [ProgressiveAuthentication sharedInstance].authenticationType = ProgressiveAuthenticationUnlockTypeTouchID;
+        } else {
+            UIAlertView *noTouchIDView = [[UIAlertView alloc] initWithTitle:@"" message:@"TouchID not available. Please pick another authentication type" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [noTouchIDView show];
+        }
     } else if ([authenticationMethod isEqual:@"Pattern"]) {
         ProgressiveAuthenticationCreatePatternViewController *patternVC = [[ProgressiveAuthenticationCreatePatternViewController alloc] init];
         [self presentViewController:patternVC animated:YES completion:nil];
     } else if ([authenticationMethod isEqual:@"One-time code"]) {
-        
+        ProgressiveAuthenticationCreateOneTimePasswordViewController *oneTimeVC = [[ProgressiveAuthenticationCreateOneTimePasswordViewController alloc] init];
+        [self setUpAuthenticatedView];
+        [self presentViewController:oneTimeVC animated:YES completion:nil];
     } else if ([authenticationMethod isEqual: @"None"]) {
         [self setUpAuthenticatedView];
     }

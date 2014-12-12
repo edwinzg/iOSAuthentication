@@ -13,7 +13,6 @@ typedef NS_ENUM(NSUInteger, ProgressiveAuthenticationUnlockType) {
     ProgressiveAuthenticationUnlockTypeNone,
     ProgressiveAuthenticationUnlockTypeTouchID,
     ProgressiveAuthenticationUnlockTypePassword,
-    ProgressiveAuthenticationUnlockTypePIN,
     ProgressiveAuthenticationUnlockTypeOneTime,
     ProgressiveAuthenticationUnlockTypePattern
 };

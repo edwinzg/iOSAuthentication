@@ -46,6 +46,9 @@
     } else if ([[ProgressiveAuthentication sharedInstance] authenticationType] ==
                ProgressiveAuthenticationUnlockTypePattern) {
         [self showPatternAnimated:animated];
+    } else if ([[ProgressiveAuthentication sharedInstance] authenticationType] ==
+               ProgressiveAuthenticationUnlockTypeOneTime) {
+        [self showOneTimeAnimated:animated];
     }
 }
 
@@ -66,15 +69,15 @@
 }
 
 - (void)showPasswordAnimated:(BOOL)animated {
-    [self presentViewController:[self enterPasswordVC]
-                       animated:animated
-                     completion:nil];
+    [self presentViewController:[self enterPasswordVC] animated:animated completion:nil];
 }
 
 - (void)showPatternAnimated:(BOOL)animated {
-    [self presentViewController:[self enterPatternVC]
-                       animated:animated
-                     completion:nil];
+    [self presentViewController:[self enterPatternVC] animated:animated completion:nil];
+}
+
+- (void)showOneTimeAnimated:(BOOL)animted{
+    [self presentViewController:[self enterOneTimeVC] animated:YES completion:nil];
 }
 
 - (ProgressiveAuthenticationEnterPasswordViewController *)enterPasswordVC {
@@ -105,6 +108,19 @@
     return enterPatternVC;
 }
 
+- (ProgressiveAuthenticationEnterOneTimePasswordViewController *)enterOneTimeVC {
+    ProgressiveAuthenticationEnterOneTimePasswordViewController *enterOneTimeVC = [[ProgressiveAuthenticationEnterOneTimePasswordViewController alloc] init];
+    __weak ProgressiveAuthenticationUnlockViewController *weakSelf = self;
+    enterOneTimeVC.willFinishWithResult = ^(BOOL success) {
+        if (success) {
+            [weakSelf unlockWithType:ProgressiveAuthenticationUnlockTypeOneTime];
+        }
+        else {
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        }
+    };
+    return enterOneTimeVC;
+}
 
 - (void)appWillEnterForeground {
     if (!self.presentedViewController) {

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Security/Security.h>
 #import <LocalAuthentication/LocalAuthentication.h>
+#import <CommonCrypto/CommonHMAC.h>
 
 #import "ProgressiveAuthentication.h"
 #import "ProgressiveAuthenticationLockModel.h"
@@ -66,8 +67,49 @@
     return [[NSUserDefaults standardUserDefaults] integerForKey:@"authenticationType"];
 }
 
+- (void)setAuthenticationType:(ProgressiveAuthenticationUnlockType)authenticationType {
+    [[NSUserDefaults standardUserDefaults] setValue:@(authenticationType) forKey:@"authenticationType"];
+}
+
 - (BOOL)isPasswordValid:(NSString *)password {
-    return [password isEqualToString:[self currentPassword]];
+    if ([self authenticationType] == ProgressiveAuthenticationUnlockTypeOneTime) {
+        NSString *hash = [self calculateOneTimeCode];
+        return [password isEqualToString:hash];
+    } else {
+        return [password isEqualToString:[self currentPassword]];
+    }
+}
+
+- (NSString *)calculateOneTimeCode {
+    NSTimeInterval secondsSinceUnixEpoch = [[NSDate date] timeIntervalSince1970];
+    NSString *unix = [NSString stringWithFormat:@"%f", secondsSinceUnixEpoch];
+    
+    NSString *key = [self currentPassword]; // this is a __NSCFString
+    const char *cKey  = [key cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *cData = [unix cStringUsingEncoding:NSASCIIStringEncoding];
+    unsigned char cHMAC[CC_SHA512_DIGEST_LENGTH];
+    
+    CCHmac(kCCHmacAlgSHA512, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+    NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+    
+    return [self convertToHexadecimalString:HMAC];
+}
+
+- (NSString *)convertToHexadecimalString: (NSData *)data {
+    const unsigned char *dataBuffer = (const unsigned char *)[data bytes];
+    
+    if (!dataBuffer) {
+        return [NSString string];
+    }
+    
+    NSUInteger dataLength  = [data length];
+    NSMutableString *hexString  = [NSMutableString stringWithCapacity:(dataLength * 2)];
+    
+    for (int i = 0; i < dataLength; ++i) {
+        [hexString appendString:[NSString stringWithFormat:@"%02lx", (unsigned long)dataBuffer[i]]];
+    }
+    
+    return [NSString stringWithString:hexString];
 }
 
 - (void)setPassword:(NSString *)password forAuthenticationType:(ProgressiveAuthenticationUnlockType)authenticationType{
